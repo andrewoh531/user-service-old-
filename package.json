@@ -2,13 +2,14 @@
   "name": "apex-webpack",
   "version": "1.0.0",
   "scripts": {
-    "test": "mocha --recursive tests --compilers js:babel-core/register"
+    "test": "mocha --recursive tests ./tests/bootstrap.test.js --compilers js:babel-core/register"
   },
   "dependencies": {
     "babel-polyfill": "^6.3.14",
     "chai": "^3.5.0",
     "dynogels": "^5.0.2",
-    "joi": "^9.0.1"
+    "joi": "^9.0.1",
+    "nconf": "^0.8.4"
   },
   "devDependencies": {
     "babel-loader": "^6.2.3",

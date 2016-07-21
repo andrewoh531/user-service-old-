@@ -5,7 +5,7 @@ import func from '../functions/getOrCreateUser/src/index';
 describe('getOrCreateUser', () => {
 
   const payload = {
-    userId: 'a',
+    userId: '123',
     name: 'Andrew Oh',
     email: 'andrewoh@dius.com.au'
   };
@@ -18,11 +18,11 @@ describe('getOrCreateUser', () => {
       });
   });
 
-  it('should get user when user already exists', () => {
+  it('should create user if user does not exists', () => {
     return tester(func)
       .event(payload)
       .expectResult(res => {
-        expect(res).to.deep.equal({key: 'a', value: 'oh'});
+        expect(res).to.deep.equal(payload);
       });
   });
 
