@@ -1,5 +1,5 @@
 {
-  "name": "apex-webpack",
+  "name": "user-service",
   "version": "1.0.0",
   "scripts": {
     "test": "NODE_ENV=test mocha --recursive tests ./tests/bootstrap.test.js --compilers js:babel-core/register --opts ./mocha.opts"
