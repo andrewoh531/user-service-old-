@@ -5,6 +5,7 @@
     "test": "NODE_ENV=test mocha --recursive tests ./tests/bootstrap.test.js --compilers js:babel-core/register --opts ./mocha.opts"
   },
   "dependencies": {
+    "aws-sdk": "^2.4.8",
     "babel-polyfill": "^6.3.14",
     "bluebird": "^3.4.1",
     "chai": "^3.5.0",
@@ -19,6 +20,7 @@
     "babel-plugin-transform-runtime": "^6.4.3",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
+    "dynalite": "^1.0.2",
     "json-loader": "^0.5.4",
     "lambda-tester": "^2.6.0",
     "mocha": "^2.5.3",
