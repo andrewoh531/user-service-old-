@@ -10,6 +10,7 @@ const users = vogels.define('users', {
   schema: {
     userId: Joi.string(),
     name: Joi.string(),
+    fbId: Joi.string(),
     email: Joi.string().email()
   }
 });

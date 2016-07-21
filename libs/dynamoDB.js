@@ -1,7 +1,6 @@
 import AWS from 'aws-sdk';
 import Promise from 'bluebird';
 import vogels from 'dynogels';
-import config from './config';
 
 Promise.promisifyAll(require('dynogels/lib/table').prototype);
 Promise.promisifyAll(require('dynogels/lib/item').prototype);
@@ -22,12 +21,12 @@ vogels.dynamoDriver(dynamo);
 
 function initializeDynamoDB() {
   const options = {
-    region: config.get('awsRegion'),
+    region: 'ap-southeast-2',
     apiVersion: '2012-08-10'
   };
 
-  if (config.get('dynamoDBEndpoint')) {
-    options.endpoint = config.get('dynamoDBEndpoint');
+  if (process.env.NODE_ENV === 'test') {
+    options.endpoint = 'http://localhost:4567';
   }
 
   return new AWS.DynamoDB(options);

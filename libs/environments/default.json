@@ -1,4 +1,0 @@
-{
-  "dynamoDBEndpoint": "http://localhost:4567",
-  "awsRegion": "ap-southeast-2"
-}
