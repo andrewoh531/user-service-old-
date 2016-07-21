@@ -1,23 +1,23 @@
 import UserModel from '../../../libs/UserModel';
 
+function createUserIfNonExistent(event) {
+  return (res) => {
+    if (res === null) {
+      return UserModel.createAsync(event);
+    } else {
+      return res;
+    }
+  };
+}
+
 export default function(event, ctx, cb) {
-
   if (event.userId) {
-    UserModel.get(event.userId, function (err, res) {
-        if (res === null) {
-          UserModel.create(event, (err, user) => {
-            const response = {
-              userId: user.get('userId'),
-              name: user.get('name'),
-              email: user.get('email')
-            };
-            cb(null, response);
-          });
-
-        } else {
-          cb(null, res);
-        }
-    });
+    UserModel.getAsync(event.userId)
+      .then(createUserIfNonExistent(event))
+      .then(res => cb(null, JSON.parse(JSON.stringify(res))))
+      .catch(err => {
+        console.error(`error calling UserModel.getAsync = ${JSON.stringify(err)}`);
+      });
   } else {
     cb(new Error('Missing userId parameter'));
   }

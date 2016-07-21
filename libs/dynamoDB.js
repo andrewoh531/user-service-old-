@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk';
-import vogels from 'dynogels';
+import vogels from './vogelsPromisified';
 import config from './config';
 
 const dynamo = initializeDynamoDB();
