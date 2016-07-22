@@ -34,7 +34,7 @@ export default function(event, ctx, cb) {
       .then(createUserIfNonExistent(event))
       .then(res => cb(null, JSON.parse(JSON.stringify(res))))
       .catch(err => {
-        console.error(`error calling UserModel.getAsync = ${JSON.stringify(err)}`);
+        console.error(`Error calling UserModel.getAsync = ${JSON.stringify(err)}`);
         cb(err);
       });
   } catch (err) {

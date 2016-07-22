@@ -86,4 +86,16 @@ describe('getOrCreateUser', () => {
        })
        .catch(done);
    });
+
+   it('should error when trying to save with extra parameters provided', done => {
+     const payloadWithExtras = Object.assign({}, payload, {fbId: 'extras', a: 'a', b: 'b', c: 'c'});
+
+     tester(func)
+       .event(payloadWithExtras)
+       .expectError(err => {
+         expect(err.cause.name).to.equal('ValidationError');
+         done();
+       })
+       .catch(done);
+   })
 });
