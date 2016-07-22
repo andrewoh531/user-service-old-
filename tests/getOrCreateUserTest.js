@@ -8,8 +8,8 @@ describe('getOrCreateUser', () => {
 
   const payload = {
     userId: '123',
-    name: 'Andrew Oh',
-    email: 'andrewoh@dius.com.au'
+    name: 'Full Name Here',
+    email: 'test@email.com'
   };
 
   it('should error when userId is not provided', () => {
