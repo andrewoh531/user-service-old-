@@ -1,7 +1,7 @@
 import vogels from '../libs/dynamoDB';
 import UserModel from '../libs/UserModel';
 
-function createTables(done) {
+before(done => {
   vogels.createTablesAsync()
     .then(() => {
       console.log('DynamoDB tables recreated');
@@ -11,11 +11,17 @@ function createTables(done) {
       console.log('Error recreating tables: ', err);
       done(err);
     });
-}
+});
 
-before(done => {
+after(done => {
   UserModel.deleteTableAsync()
-    .then(() => createTables(done))
-    .catch(() => createTables(done));
+    .then(() => {
+      console.log('successfully deleted tables');
+      done();
+    })
+    .catch(err => {
+      console.log(`error deleting tables: ${JSON.stringify(err)}`);
+      done();
+    });
 });
 

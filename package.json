@@ -10,7 +10,8 @@
     "bluebird": "^3.4.1",
     "chai": "^3.5.0",
     "dynogels": "^5.0.2",
-    "joi": "^9.0.1"
+    "joi": "^9.0.1",
+    "node-uuid": "^1.4.7"
   },
   "devDependencies": {
     "babel-loader": "^6.2.3",

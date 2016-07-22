@@ -12,7 +12,10 @@ const users = vogels.define('users', {
     name: Joi.string(),
     fbId: Joi.string(),
     email: Joi.string().email()
-  }
+  },
+  indexes : [{
+    hashKey : 'fbId', name : 'FbIdIndex', type : 'global'
+  }]
 });
 
 export default users;

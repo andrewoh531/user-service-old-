@@ -1,3 +1,4 @@
+
 resource "aws_iam_role" "lambda_role" {
   name = "apex-lambda-user-service"
   assume_role_policy = <<EOF
@@ -52,7 +53,8 @@ resource "aws_iam_role_policy" "dynamo_db_policy" {
         "dynamodb:UpdateItem"
       ],
       "Resource": [
-        "${aws_dynamodb_table.users.arn}"
+        "${aws_dynamodb_table.users.arn}",
+        "arn:aws:dynamodb:ap-southeast-2:${var.account_id}:table/users/index/FbIdIndex"
       ]
     }
   ]

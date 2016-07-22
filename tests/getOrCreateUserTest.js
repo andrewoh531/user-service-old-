@@ -2,12 +2,22 @@ import tester from 'lambda-tester';
 import {expect} from 'chai';
 
 import UserModel from '../libs/UserModel';
-import func from '../functions/getOrCreateUser/src/index';
+import func from '../functions/getOrCreateUserByFacebookId/src/index';
+
+function expectQueryCount(fbId, count) {
+  return UserModel
+    .query(fbId)
+    .usingIndex('FbIdIndex')
+    .execAsync()
+    .then(res => {
+      expect(res.Count).to.equal(count);
+    });
+}
 
 describe('getOrCreateUser', () => {
 
   const payload = {
-    userId: '123',
+    fbId: '1234',
     name: 'Full Name Here',
     email: 'test@email.com'
   };
@@ -16,32 +26,47 @@ describe('getOrCreateUser', () => {
     return tester(func)
       .event({})
       .expectError(err => {
-        expect(err.message).to.equal('Missing userId parameter');
+        expect(err.message).to.equal('Missing fbId parameter');
+      });
+  });
+
+  it('should return error when name not provided', () => {
+    return tester(func)
+      .event({fbId: '1'})
+      .expectError(err => {
+        expect(err.message).to.equal('Missing name parameter');
+      });
+  });
+
+  it('should return error when email not provided', () => {
+    return tester(func)
+      .event({fbId: '1', name: 'ao'})
+      .expectError(err => {
+        expect(err.message).to.equal('Missing email parameter');
       });
   });
 
   it('should create user if user does not exists', done => {
 
-    UserModel.getAsync(payload.userId)
-      .then(res => {
-        expect(res).to.equal.null;
+    expectQueryCount(payload.fbId, 0)
+      .then(() => {
         return tester(func)
           .event(payload)
           .expectResult(res => {
-            expect(res).to.deep.equal(payload);
-          });
+            expect(res.fbId).to.equal(payload.fbId);
+            expect(res.name).to.equal(payload.name);
+            expect(res.email).to.equal(payload.email);
+            expect(res.userId).to.be.ok;
+          })
       })
-      .then(() => UserModel.getAsync(payload.userId))
-      .then(res => {
-        expect(JSON.parse(JSON.stringify(res))).to.deep.equal(payload);
-        done();
-      })
+      .then(() => expectQueryCount(payload.fbId, 1))
+      .then(done)
       .catch(done);
   });
 
    it('should retrieve existing user when user already exist', done => {
      const newUser = {
-       userId: '123',
+       fbId: '1234',
        name: 'SecondUser',
        email: 'second@user.com'
      };
@@ -52,7 +77,10 @@ describe('getOrCreateUser', () => {
          return tester(func)
            .event(newUser)
            .expectResult(res => {
-             expect(res).to.deep.equal(payload);
+             expect(res.fbId).to.equal(payload.fbId);
+             expect(res.name).to.equal(payload.name);
+             expect(res.email).to.equal(payload.email);
+             expect(res.userId).to.be.ok;
              done();
            });
        })
