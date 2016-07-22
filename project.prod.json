@@ -4,8 +4,8 @@
   "runtime": "nodejs4.3",
   "memory": 128,
   "timeout": 5,
-  "profile": "andrewoh1983",
-  "role": "arn:aws:iam::687417341626:role/user-service_lambda_function",
+  "profile": "andrewoh531",
+  "role": "arn:aws:iam::046706537651:role/user-service_lambda_function",
   "handler": "lib.default",
   "hooks": {
     "build": "../../node_modules/.bin/webpack --config ../../webpack.config.js",
