@@ -5,7 +5,7 @@
   "memory": 128,
   "timeout": 5,
   "profile": "dius",
-  "role": "arn:aws:iam::773592622512:role/apex-webpack_lambda_function",
+  "role": "arn:aws:iam::773592622512:role/apex-lambda-user-service",
   "handler": "lib.default",
   "hooks": {
     "build": "../../node_modules/.bin/webpack --config ../../webpack.config.js",

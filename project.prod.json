@@ -5,7 +5,7 @@
   "memory": 128,
   "timeout": 5,
   "profile": "andrewoh531",
-  "role": "arn:aws:iam::046706537651:role/user-service_lambda_function",
+  "role": "arn:aws:iam::046706537651:role/apex-lambda-user-service",
   "handler": "lib.default",
   "hooks": {
     "build": "../../node_modules/.bin/webpack --config ../../webpack.config.js",
