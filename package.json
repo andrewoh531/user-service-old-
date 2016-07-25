@@ -10,6 +10,7 @@
     "bluebird": "^3.4.1",
     "chai": "^3.5.0",
     "dynogels": "^5.0.2",
+    "dynogels-promisified": "^1.0.1",
     "joi": "^9.0.1",
     "node-uuid": "^1.4.7"
   },

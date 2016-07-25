@@ -1,22 +1,6 @@
 import AWS from 'aws-sdk';
 import Promise from 'bluebird';
-import vogels from 'dynogels';
-
-// ------------------------- Promisify dynogels/vogels -------------------------
-Promise.promisifyAll(require('dynogels/lib/table').prototype);
-Promise.promisifyAll(require('dynogels/lib/item').prototype);
-Promise.promisifyAll(require('dynogels/lib/query').prototype);
-Promise.promisifyAll(require('dynogels/lib/scan').prototype);
-Promise.promisifyAll(require('dynogels/lib/parallelScan').prototype);
-
-const vogels_model = vogels.model;
-vogels.model = function(name, model){
-  if (model) { Promise.promisifyAll(model); }
-  return vogels_model.apply(vogels, arguments);
-};
-
-Promise.promisifyAll(vogels);
-// ------------------------- End of promisification of dynogels/vogels -------------------------
+import vogels from 'dynogels-promisified';
 
 if (process.env.NODE_ENV === 'test') {
   vogels.AWS.config.update({accessKeyId: 'stub', secretAccessKey: 'stub', region: "ap-southeast-2"});
