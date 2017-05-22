@@ -1,5 +1,4 @@
 import Joi from 'joi';
-import AWS from 'aws-sdk';
 
 import vogels from './dynamoDB';
 

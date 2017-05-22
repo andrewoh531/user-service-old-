@@ -1,5 +1,4 @@
 import AWS from 'aws-sdk';
-import Promise from 'bluebird';
 import vogels from 'dynogels-promisified';
 
 if (process.env.NODE_ENV === 'test') {
